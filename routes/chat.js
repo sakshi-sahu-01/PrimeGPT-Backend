@@ -1,11 +1,10 @@
 import express from "express";
 import Thread from "../models/Thread.js";
-import openai from "../Utils/openai.js";
-
+import getOpenAIAPIResponse from "../utils/openai.js";
 
 const router = express.Router();
 
-
+//test
 router.post("/test", async(req, res) => {
     try {
         const thread = new Thread({
@@ -21,14 +20,15 @@ router.post("/test", async(req, res) => {
     }
 });
 
-
+//Get all threads
 router.get("/thread", async(req, res) => {
-    try{
-             const threads = await Thread.find({}).sort({updatedAt:-1});
-            res.json(threads);
-      }catch(err){
-            console.log(err);
-            res.status(500).json({error: "Failed to fetch threads"});
+    try {
+        const threads = await Thread.find({}).sort({updatedAt: -1});
+        //descending order of updatedAt...most recent data on top
+        res.json(threads);
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({error: "Failed to fetch threads"});
     }
 });
 
@@ -71,7 +71,7 @@ router.post("/chat", async(req, res) => {
     const {threadId, message} = req.body;
 
     if(!threadId || !message) {
-       return res.status(400).json({error: "missing required fields"});
+        res.status(400).json({error: "missing required fields"});
     }
 
     try {
@@ -88,7 +88,7 @@ router.post("/chat", async(req, res) => {
             thread.messages.push({role: "user", content: message});
         }
 
-        const assistantReply = await getApiResponse(message);
+        const assistantReply = await getOpenAIAPIResponse(message);
 
         thread.messages.push({role: "assistant", content: assistantReply});
         thread.updatedAt = new Date();
@@ -100,6 +100,8 @@ router.post("/chat", async(req, res) => {
         res.status(500).json({error: "something went wrong"});
     }
 });
+
+
 
 
 export default router;
