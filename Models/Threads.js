@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MessageSchema = new mongoose.Schema({
+const messageSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: ["user", "assistant"],
@@ -10,31 +10,34 @@ const MessageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    timestamp: {
+    timeStamp: {
         type: Date,
         default: Date.now
+        
     }
-});
+})
 
-const ThreadSchema = new mongoose.Schema({
-    threadId: {
+const threadSchema = new mongoose.Schema({
+    threadId : {
         type: String,
-        required: true,
+        require: true,
         unique: true
     },
-    title: {
+    title : {
         type: String,
         default: "New Chat"
     },
-    messages: [MessageSchema],
+    messages: [messageSchema],
     createdAt: {
         type: Date,
         default: Date.now
+        
     },
     updatedAt: {
         type: Date,
         default: Date.now
+        
     }
-});
+})
 
-export default mongoose.model("Thread", ThreadSchema);
+export default mongoose.model("Thread", threadSchema);
