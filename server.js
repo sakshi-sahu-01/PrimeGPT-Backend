@@ -4,7 +4,8 @@ import cors from "cors";
 import fetch from "node-fetch";
 import { GoogleGenAI } from "@google/genai";
 import mongoose from "mongoose";
-import chatRoutes from "./Routes/chat.js";
+import chatRoutes from "../Routes/chat.js";
+
 
 
 
