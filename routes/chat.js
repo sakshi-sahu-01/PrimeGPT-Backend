@@ -1,6 +1,6 @@
 import express from "express";
 import Thread from "../Models/Threads.js";
-import getApiResponse from "../utils/openai.js";
+import getApiResponse from "../Utils/openai.js";
 
 const router = express.Router();
 
