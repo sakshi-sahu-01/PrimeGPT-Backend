@@ -1,8 +1,8 @@
 import express from "express";
 import 'dotenv/config';
 import cors from "cors";
-import fetch from "node-fetch";
-import { GoogleGenAI } from "@google/genai";
+// import fetch from "node-fetch";
+// import { GoogleGenAI } from "@google/genai";
 import mongoose from "mongoose";
 import chatRoutes from "./routes/chat.js";
 
@@ -47,6 +47,7 @@ const connectDB = async() => {
 //         ]
 //       }
 //     ]
+
 //   };
 
 //   try {
@@ -65,6 +66,7 @@ const connectDB = async() => {
 //     console.log(data);
 //     res.send(data);
 //   } catch (err) {
+
 //     console.error("Fetch error:", err);
 //     res.status(500).send("Error connecting to Gemini API");
 //   }

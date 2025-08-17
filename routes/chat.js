@@ -1,6 +1,6 @@
 import express from "express";
-import Thread from "../Models/Threads.js";
-import getApiResponse from "../Utils/openai.js";
+import Thread from "../models/Thread.js";
+import getApiResponse from "../utils/openai.js";
 
 const router = express.Router();
 
@@ -8,8 +8,8 @@ const router = express.Router();
 router.post("/test", async(req, res) => {
     try {
         const thread = new Thread({
-            threadId: "abc",
-            title: "Testing New Thread2"
+            threadId: "xyz",
+            title: "Testing New Thread3"
         });
 
         const response = await thread.save();
@@ -24,7 +24,7 @@ router.post("/test", async(req, res) => {
 router.get("/thread", async(req, res) => {
     try{
              const threads = await Thread.find({}).sort({updatedAt:-1});
-            res.send(threads);
+            res.json(threads);
       }catch(err){
             console.log(err);
             res.status(500).json({error: "Failed to fetch threads"});
@@ -66,7 +66,7 @@ router.delete("/thread/:threadId", async (req, res) => {
     }
 });
 
-router.post("/chat", async(req, res) => {
+router.post("/Chat", async(req, res) => {
     const {threadId, message} = req.body;
 
     if(!threadId || !message) {
